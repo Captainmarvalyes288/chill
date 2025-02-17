@@ -23,8 +23,8 @@ This is a **Streamlit-based** AI-powered document question-answering application
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-repo/document-qa
-cd document-qa
+git clone https://github.com/rohannso/ai_powered_pdf_qanda
+cd ai_powered_pdf_qanda
 ```
 
 ### 2️⃣ Create a Virtual Environment
