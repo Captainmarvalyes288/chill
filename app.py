@@ -12,6 +12,11 @@ import pypdf
 from langchain.chains import RetrievalQA
 import re
 from langchain.document_loaders import PyMuPDFLoader
+from dotenv import load_dotenv
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+print(GROQ_API_KEY)
 
 
 # Initialize session state for chat history
@@ -104,7 +109,7 @@ Answer:"""
         # Initialize LLM
         llm = ChatGroq(
             model_name="deepseek-r1-distill-qwen-32b",
-            api_key="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"
+            api_key=GROQ_API_KEY
         )
 
         # Create QA chain
