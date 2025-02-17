@@ -10,6 +10,8 @@ import tempfile
 import os
 import pypdf
 from langchain.chains import RetrievalQA
+import re
+from langchain.document_loaders import PyMuPDFLoader
 
 
 # Initialize session state for chat history
@@ -19,7 +21,7 @@ if 'chat_history' not in st.session_state:
 st.cache_resource.clear()
 
 # Streamlit UI
-st.title("📄 AI-Powered &A")
+st.title("📄 AI-Powered  Aa ")
 st.write("Upload a PDF and ask questions based on its content.")
 
 # Initialize variables in session state
@@ -58,7 +60,7 @@ if uploaded_file is not None:
             st.stop()
 
         # Load PDF with LangChain
-        loader = PyPDFLoader(pdf_path)
+        loader = PyMuPDFLoader(pdf_path)
         documents = loader.load()
         
         if not documents:
@@ -137,9 +139,17 @@ if st.session_state.qa_chain is not None:
             response = st.session_state.qa_chain(
             {"question": user_question, "chat_history": st.session_state.chat_history}
             )
+            answer=response['answer']
+            if "<think>" in answer.lower():
+        # Extract everything after the last occurrence of thinking-related content
+                clean_answer = re.split(r'<think>.*?</think>', answer, flags=re.IGNORECASE|re.DOTALL)[-1]
+                st.write(clean_answer.strip())
+
+            else:
+                st.write(response['answer'].strip())
+
             
             # Display just the answer without any additional context
-            st.write(response['answer'].strip())
             
             # Update chat history
             st.session_state.chat_history.append(

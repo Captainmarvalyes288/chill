@@ -1,0 +1,5 @@
+langchain
+pdfquery
+faiss
+groq
+pypdf
