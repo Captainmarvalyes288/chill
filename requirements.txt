@@ -1,5 +1,5 @@
 langchain
 pdfquery
-faiss
+faiss-cpu
 groq
 pypdf
