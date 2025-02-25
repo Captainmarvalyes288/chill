@@ -1,0 +1,51 @@
+name: AI-Powered Document QA
+description: >
+  This is a Streamlit-based AI-powered document question-answering application 
+  that allows users to upload a PDF and ask questions based on its content. 
+  The system uses MapReduce to process the document and generate answers based 
+  on all extracted text.
+
+runtime: python3.9
+
+entrypoint: streamlit run app.py
+
+dependencies:
+  - python
+  - pip
+  - pip:
+      - streamlitht
+      - langchain
+      - pymupdf
+      - pypdf
+      - faiss-cpu
+      - huggingface-hub
+      - groq-chat
+
+features:
+  - PDF Upload & Processing: Extracts text from PDFs and splits them into meaningful chunks.
+  - MapReduce-based QA: Answers questions by processing all document chunks before aggregating a final response.
+  - Handles Encrypted PDFs: Ensures that password-protected PDFs are not processed.
+  - Automatic Text Cleanup: Removes unwanted `<think>` tags from responses.
+  - Chat History: Maintains a session-based chat history.
+
+setup:
+  - https://github.com/Captainmarvalyes288/chill.git
+  - cd ai_powered_pdf_qanda
+  - python -m venv venv
+  - source venv/bin/activate
+  - pip install -r requirements.txt
+
+execution:
+  - streamlit run app.py
+
+configuration:
+  - LLM Model: The application uses `ChatGroq` with `deepseek-r1-distill-qwen-32b`. If needed, update the model in `app.py`.
+  - Chunk Size & Overlap: Adjusted in `CharacterTextSplitter` for better accuracy.
+
+future_enhancements:
+  - Add FAISS similarity search as an option for faster querying.
+  - Enable support for multiple document formats (Word, TXT).
+  - Provide PDF summarization along with QA.
+
+issues_contributions: >
+  For Issues & Contributions: Open a pull request or report issues in the repository.
